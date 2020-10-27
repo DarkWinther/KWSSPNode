@@ -1,0 +1,26 @@
+extends ./default.pug
+block content
+  main
+    h3 Login
+    form(action="/api/login", method="POST")
+      label(for="login-username") Brugernavn
+      input(type="text", id="login-username" name="username", placeholder="Brugernavn")
+      label(for="login-pwd") Kodeord
+      input(type="password", id="login-pwd", name="password")
+      input(type="submit", value="Login")
+
+    h3 Ny bruger
+    form(action="api/users", method="POST")
+      label(for="new-username") Brugernavn
+      input(type="text", id="new-username", name="username", placeholder="Brugernavn")
+      label(for="new-pass") Kodeord
+      input(type="password", id="new-pass", name="password")
+      label(for="mew-email") Email
+      input(type="email", id="new-email", name="email", placeholder="Email")
+      input(type="submit", value="Skab bruger")
+
+    if user
+      - const useremail = user.email ? ` (${user.email})` : ''
+      h3 Logget ind som: #{user.name}#{useremail}
+      form(action="api/logout", method="POST")
+        input(type="submit", value="Log ud")
