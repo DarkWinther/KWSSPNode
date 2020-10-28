@@ -3,6 +3,7 @@ import { MongoClient, ObjectID } from 'mongodb';
 import { todosCollection, usersCollection } from '../collections';
 import { Todo } from '../models/todo';
 import { User } from '../models/user';
+import { unProtect } from '../utils/cipher-protection';
 
 export const home = (app: Application, db: MongoClient) => {
   const dbo = db.db();
@@ -38,7 +39,21 @@ export const home = (app: Application, db: MongoClient) => {
         user = userResult;
       }
       if (todosResult?.length) {
-        userTodos = todosResult;
+        const returnUnprotected = async ({
+          title,
+          content,
+          ...rest
+        }: Todo): Promise<Todo> => {
+          const [uTitle, uContent] = await Promise.all([
+            unProtect(title),
+            unProtect(content),
+          ]);
+          return { title: uTitle, content: uContent, ...rest };
+        };
+
+        userTodos = await Promise.all(
+          todosResult.map(t => returnUnprotected(t))
+        );
       }
     }
 

@@ -38,7 +38,10 @@ block content
           ul
             each todo in todos
               li
-                h5= todo.title
-                input(type="checkbox", name="isDone", checked=todo.isDone)
-                small= todo.content
+                form(action="/api/todos/patch", method="POST")
+                  h5= todo.title
+                  input(type="hidden", name="todoId", value=todo._id)
+                  input(type="checkbox", name="isDone", checked=todo.isDone)
+                  small= todo.content
+                  input(type="submit", value="Opdater")
               
