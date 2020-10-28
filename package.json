@@ -22,8 +22,8 @@
   },
   "scripts": {
     "start": "nodemon --delay 1",
-    "prettier": "prettier . -c --end-of-line auto --arrow-parens avoid",
-    "prettier:fix": "prettier . --write --end-of-line auto --arrow-parens avoid",
+    "prettier": "prettier . -c --end-of-line auto --arrow-parens avoid --single-quote",
+    "prettier:fix": "prettier . --write --end-of-line auto --arrow-parens avoid --single-quote",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

@@ -24,3 +24,21 @@ block content
       h3 Logget ind som: #{user.name}#{useremail}
       form(action="api/logout", method="POST")
         input(type="submit", value="Log ud")
+
+      h3 Ny todo
+        form(action="/api/todos", method="POST")
+          label(for="new-todo-title") Titel
+          input(type="text", id="new-todo-title", name="title", placeholder="Titel")
+          label(for="new-todo-content") Indhold
+          input(type="text", id="new-todo-content", name="content", placeholder="Indhold")
+          input(type="submit", value="Send")
+
+      if todos
+        h3 Todos
+          ul
+            each todo in todos
+              li
+                h5= todo.title
+                input(type="checkbox", name="isDone", checked=todo.isDone)
+                small= todo.content
+              

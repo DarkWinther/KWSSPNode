@@ -1,6 +1,6 @@
-import { ObjectID } from "bson";
+import { ObjectID } from 'bson';
 
-export class User {
+export interface User {
   _id: ObjectID;
   password: string;
   name: string;
