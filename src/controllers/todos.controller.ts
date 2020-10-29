@@ -2,7 +2,7 @@ import { Application } from 'express';
 import { MongoClient, ObjectID } from 'mongodb';
 import { todosCollection } from '../collections';
 import { Todo } from '../models/todo';
-import { protect, unProtect } from '../utils/cipher-protection';
+import { protect } from '../utils/cipher-protection';
 
 export const todosController = (app: Application, db: MongoClient) => {
   const dbo = db.db();
